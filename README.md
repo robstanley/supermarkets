@@ -30,8 +30,11 @@ It's a legacy app. There's no tests. You're lucky you a) have the source, and b)
 _Feel free to add tests for your code - it's not required, but you're probably increasing the likelihood of getting
 asked about testing later on._
 
-`mvn clean exec:java` will fire up a simulation. There's some config options to control the sim speed, 
-what gets printed out, etc. Since the plugin doesn't exist yet, running the sim right now will just have supermarkets 
+`mvn clean package exec:java` will fire up a simulation. There's some config options to control the sim speed, 
+what gets printed out, etc. _At the moment some of these involve adding/removing the `@Component` annotation from 
+plugin classes._
+
+Since the plugin doesn't exist yet, running the sim right now will just have supermarkets 
 selling their existing stock and then sitting there empty. To fix that you'll need to find where the plugin system 
 lives and hook into it. Please, only change/add code in the plugins package!
 
