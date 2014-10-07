@@ -20,6 +20,8 @@ logistics program that does all the heavy lifting and stats gathering, but it ne
 There's no 'score', but generally customers wanting to buy stuff and the shop not having any stuff is bad, having more 
 stuff sitting on shelves (or in the warehouse) is bad, selling stuff is good, selling stuff quickly is even better.
 
+In this version there's only one shop/warehouse/supplier, and the supplier always has stock.
+
 _I'm happy to listen to suggestions about the 'no score' point. My earlier version did have a formula that tried to 
 weight the good and bad things, but it makes it too easy to game. An alternative would be a deeper simulation that 
 had expiry dates on stuff, and customers who get unhappy and don't come back. It makes the problem cooler, but bigger._

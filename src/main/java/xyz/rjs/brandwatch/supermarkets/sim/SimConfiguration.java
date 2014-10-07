@@ -27,6 +27,9 @@ public class SimConfiguration {
     @Bean
     @Autowired
     public ServiceManager simulationServiceManager(EventBus eventBus) {
-        return new ServiceManager(ImmutableList.of(clockTickService(eventBus)));
+        return new ServiceManager(ImmutableList.of(
+                clockTickService(eventBus),
+                new CustomerService(eventBus),
+                new SupplierService(eventBus)));
     }
 }
