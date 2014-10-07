@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import xyz.rjs.brandwatch.supermarkets.logistics.LogisticsConfiguration;
-import xyz.rjs.brandwatch.supermarkets.model.Supplier;
-import xyz.rjs.brandwatch.supermarkets.model.Warehouse;
 
 @Configuration
 @Import(LogisticsConfiguration.class)
@@ -26,28 +24,27 @@ public class SimConfiguration {
     }
 
     @Bean
-    public Supplier supplier() {
-        Supplier supplier = new Supplier();
-        supplier.setDistanceFromWarehouse(15);
-        return supplier;
-    }
-
-    @Bean
-    public Warehouse warehouse() {
-        Warehouse warehouse = new Warehouse();
-        warehouse.setDistanceFromShop(17);
-        warehouse.setStock(0);
+    @Autowired
+    public Warehouse warehouse(EventBus eventBus) {
+        Warehouse warehouse = new Warehouse(eventBus);
         return warehouse;
     }
 
     @Bean
     @Autowired
-    public ServiceManager simulationServiceManager(EventBus eventBus) {
+    public Shop shop(EventBus eventBus) {
+        return new Shop(eventBus);
+    }
+
+    @Bean
+    @Autowired
+    public ServiceManager simulationServiceManager(EventBus eventBus, Shop shop, Warehouse warehouse) {
         return new ServiceManager(ImmutableList.of(
                 clockTickService(eventBus),
+                new Supermarket(eventBus),
+                new Supplier(eventBus),
                 new CustomerService(eventBus),
-                new Shop(eventBus),
-                new RegularOrderService(eventBus, warehouse()),
-                new SupplierService(eventBus, supplier())));
+                shop,
+                new WarehouseManagementService(eventBus, warehouse, shop)));
     }
 }

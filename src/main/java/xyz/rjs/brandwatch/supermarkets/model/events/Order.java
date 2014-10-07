@@ -1,6 +1,6 @@
 package xyz.rjs.brandwatch.supermarkets.model.events;
 
-import xyz.rjs.brandwatch.supermarkets.model.Warehouse;
+import xyz.rjs.brandwatch.supermarkets.sim.Warehouse;
 
 public class Order {
     private int volume;
