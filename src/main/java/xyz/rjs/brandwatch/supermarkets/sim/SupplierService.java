@@ -1,5 +1,8 @@
 package xyz.rjs.brandwatch.supermarkets.sim;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.jfairy.Fairy;
@@ -24,7 +27,15 @@ public class SupplierService extends AbstractTickingService {
     }
 
     public void tick(ClockTick tick) {
-
+        List<MovingOrder> arrived = newArrayList();
+        for (MovingOrder order : orders) {
+            int distanceLeft = order.travel();
+            if (distanceLeft == 0) {
+                arrived.add(order);
+                order.getOrder().getWarehouse().addStock(order.getOrder().getVolume());
+            }
+        }
+        orders.removeAll(arrived);
     }
 
     @Subscribe
