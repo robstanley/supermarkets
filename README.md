@@ -1,51 +1,56 @@
-Supermarkets
+Brandwatch Interview Question: Supermarkets
 ============
 Background
 ----------
-Customers buy stuff.
 
-Supermarkets sell stuff.
+If you've ever worked in the food retail industry, you'll notice that there are some simple rules that supermarkets follow:
 
-Supermarkets can only keep a bit of stuff in shops.
+* Customers buy products.
+* Supermarkets sell products.
+* Supermarkets can only keep a certain amount of product in stock.
+* Supermarkets supply shops from their warehouses.
+* Supermarkets buy lots of products from suppliers.
 
-Supermarkets supply shops from their warehouses.
+When all of these things happen in unison, supermarkets make lots of money, people have food on their tables, and everyone is very happy indeed.
 
-Supermarkets buy lots of stuff from suppliers.
-
-Problem
--------
-The supermarket wants a program to control buying stock and dispatching it to supermarkets. They have an existing
+The problem
+-----------
+A large retail chain wants a program to control buying stock and dispatching it to their supermarkets. They have an existing
 logistics program that does all the heavy lifting and stats gathering, but it needs a plugin to give it a brain.
 
-There's no 'score', but generally customers wanting to buy stuff and the shop not having any stuff is bad, having more 
-stuff sitting on shelves (or in the warehouse) is bad, selling stuff is good, selling stuff quickly is even better.
+There's no definite set of rules*, but:
+
+* Customers wanting to buy products and the shop not having any is bad
+* Having too many products sitting on shelves or in the warehouse is bad 
+* Selling products is good
+* Selling products quickly is even better
 
 In this version there's only one shop/warehouse/supplier, and the supplier always has stock.
 
-_I'm happy to listen to suggestions about the 'no score' point. My earlier version did have a formula that tried to 
-weight the good and bad things, but it makes it too easy to game. An alternative would be a deeper simulation that 
-had expiry dates on stuff, and customers who get unhappy and don't come back. It makes the problem cooler, but bigger._
-The Code
---------
-It's a legacy app. There's no tests. You're lucky you a) have the source, and b) it's not in COBOL.
+The code, and how to run it
+---------------------------
+Unfortunately for you, this is a legacy app. There are no tests. You're lucky you a) have the source, and b) it's not in COBOL.
 
-_Feel free to add tests for your code - it's not required, but you're probably increasing the likelihood of getting
-asked about testing later on._
-
-`mvn clean package exec:java` will fire up a simulation. There's some config options to control the sim speed, 
+`mvn clean package exec:java` will fire up a simulation. There's some config options to control the simulation speed, 
 what gets printed out, etc. _At the moment some of these involve adding/removing the `@Component` annotation from 
 plugin classes._
 
-Since the plugin doesn't exist yet, running the sim right now will just have supermarkets 
-selling their existing stock and then sitting there empty. To fix that you'll need to find where the plugin system 
-lives and hook into it. Please, only change/add code in the plugins package!
+What do you want me to do?
+--------------------------
 
-Submission
-----------
-Please email your code (and any description of what you've done, if you think it needs it) to robs@brandwatch.com.
-If you've had different instructions from anybody else then do that instead! Feel free to email me to check if
-you're not sure, or if you've got any questions about the task.
+You'll notice that running the simulator will cause the supermarkets to sell their existing stock and then sit there empty. That's not good! To fix that you'll need to find where the plugin system lives and improve it.Try to write a plugin that controls the simulation according to the rules above. Use this as an opportunity to showcase your expertise. 
 
-Don't worry if one of the technologies used is something you've never encountered before; there's nothing extremely
-strange, so it should be possible to figure it out, but if you hit a brick wall then we're not going to hold it against
-you if you ask.
+When you're done, zip the folder up and send it to the member of the Brandwatch recruitment team you are in contact with. From here it will be forwarded to our engineers to review. When they receive this, we'll be looking at the following things:
+
+* The ability to build it out of the box using maven
+* The quality and style of code written
+* The tests and their structure and coverage
+* The choice of technologies used to complete the task
+* The documentation provided 
+
+Typically we expect it to compile and run on a Linux environment with Java 7. If your set up is any different, do let us know!
+
+Good luck!
+
+_* We're happy to see attempts at creating a weighted score-based system. Our engineers created formula that tried to 
+weight the good and bad outcomes against each other, but it makes it too easy to game. A more realistic alternative would be a deeper simulation that has expiry dates on products and customers who get unhappy and don't come back. It makes the problem much cooler, but much harder also._
